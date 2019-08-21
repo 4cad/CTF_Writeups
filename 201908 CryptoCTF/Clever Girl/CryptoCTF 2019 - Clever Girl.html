@@ -13163,41 +13163,13 @@ $$\frac{p}{p+1} + \frac{q+1}{q} - 2 = \frac{2s - x}{s + Y} - 2$$$$\frac{p - p - 
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">solve</span>
 <span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="k">import</span> <span class="n">long_to_bytes</span>
 
+<span class="c1"># First, we solve for p and </span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="n">p</span> <span class="o">-</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">X</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">Y</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>
 <span class="n">p</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p =&#39;</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>p = 12604273285023995463340817959574344558787108098986028639834181397979984443923512555395852711753996829630650627741178073792454428457548575860120924352450409
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="n">p</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="n">p</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;q =&#39;</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 
 <span class="k">assert</span> <span class="n">N</span> <span class="o">==</span> <span class="n">p</span><span class="o">*</span><span class="n">q</span>
@@ -13217,7 +13189,8 @@ $$\frac{p}{p+1} + \frac{q+1}{q} - 2 = \frac{2s - x}{s + Y} - 2$$$$\frac{p - p - 
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>q = 12774247264858490260286489817359549241755117653791190036750069541210299769639605520977166141575653832360695781409025914510310324035255606840902393222949771
+<pre>p = 12604273285023995463340817959574344558787108098986028639834181397979984443923512555395852711753996829630650627741178073792454428457548575860120924352450409
+q = 12774247264858490260286489817359549241755117653791190036750069541210299769639605520977166141575653832360695781409025914510310324035255606840902393222949771
 </pre>
 </div>
 </div>
@@ -13228,7 +13201,7 @@ $$\frac{p}{p+1} + \frac{q+1}{q} - 2 = \frac{2s - x}{s + Y} - 2$$$$\frac{p - p - 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
@@ -13238,8 +13211,29 @@ $$\frac{p}{p+1} + \frac{q+1}{q} - 2 = \frac{2s - x}{s + Y} - 2$$$$\frac{p - p - 
 <span class="n">d</span> <span class="o">=</span> <span class="n">gmpy2</span><span class="o">.</span><span class="n">powmod</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
 
 <span class="n">m_squared</span> <span class="o">=</span> <span class="n">gmpy2</span><span class="o">.</span><span class="n">powmod</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+</pre></div>
 
-<span class="k">assert</span> <span class="n">gmpy2</span><span class="o">.</span><span class="n">is_square</span><span class="p">(</span><span class="n">m_squared</span><span class="p">)</span>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, we have to apply a little trick that relies on the fact that the flag was encrypted without padding. Because the exponent $e$ used to encrypt the flag is even, it cannot be inverted mod phi and thus we cannot directly decrypt the message.</p>
+<p>Thankfully, $\frac{e}{2}$ can be inverted. So to extract the flag first we take the ciphertext $m^{e}$ and partially decrypt it using the inverse $d \equiv (\frac{e}{2})^{-1} (\mod phi)$:</p>
+$$(m^{e})^{d} \equiv ((m^{2})^{\frac{e}{2}})^{d} \equiv (m^{2})^{d(\frac{e}{2})} \equiv m^{2} \mod n$$<p>From here, all we need to do to get the flag is take the square root of the partially decrypted message.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">gmpy2</span><span class="o">.</span><span class="n">is_square</span><span class="p">(</span><span class="n">m_squared</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">gmpy2</span><span class="o">.</span><span class="n">isqrt</span><span class="p">(</span><span class="n">m_squared</span><span class="p">)</span>
 <span class="n">flag</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
