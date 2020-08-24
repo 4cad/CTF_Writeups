@@ -13153,8 +13153,8 @@ S = \{(p, q) : p,q \in \mathbb{Z}_{1024}, pq \equiv n \mod 2^{1024}\}
 \end{equation}<p>Specifically we only care about the elements $(p, q) \in S$ for which both $p$ and $q$ have a small number of bits. Assuming they are both essentially random elements of $\mathbb{Z}_{1024}$, the likelihood of one of them having 93 or less bits small number of bits is $r=\frac{\sum_{i=0}^{93}{1024 \choose i}}{2^{1024}}$. This probability is not good enough itself, the real weakness comes from the fact that the modulus we are attacking has this property for <em>both</em> of it primes. Thus the probability of both factors having 93 or less bits is the much smaller $r^{2}$.</p>
 <p>So you have a clear picture of the actual numbers:
 \begin{align}
-r &amp;\approx  1.17 \times 10^{134}\\
-r^{2} &amp;\approx  7.63 \times 10^{-41}
+2^{1024}r &amp;\approx  1.17 \times 10^{134}\\
+2^{1024}r^{2} &amp;\approx  7.63 \times 10^{-41}
 \end{align}</p>
 <p>The tricky part is that the Hensel lift will start at a small modulus and have to work its way up one step at a time to the final modulus of $2^{1024}$. Even though one of the primes may have only 93 bits it is possible that they are clustered near the low bits which could cause the prime to be trimmed out while the modulus is still small.</p>
 <p>The way I got around this was to use a heuristic where at each step in the Hensel lift we keep at most the 1 million solutions with the smallest number of bits. This struck a good balance between performance and probability of success, and this half optimized single-threaded implementation was able to factor the generated public keys with high enough likelihood. Instead of spending time optimizing further or adding parallelism to the algorithm, I achieved parallelism by having multiple instances of the algorithm running on different public keys at the same time which did the trick.</p>
